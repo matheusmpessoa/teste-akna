@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="app">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Teste Akna</title>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-inverse" ng-controller="menuCtrl as mn">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#/">Teste Akna</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-repeat="item in mn.nav">
+                        <a href="{{item.url}}">{{item.desc}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" ng-controller="mainCtrl as vm">
+        <h1 class="page title">Teste</h1>
+        <form>
+            <div class="form-group">
+                <label>
+                    <input ng-model="vm.input.title" type="text" class="form-control" placeholder="Digite o titulo">
+                </label>
+                <label>
+                    <input ng-model="vm.input.author" type="text" class="form-control" placeholder="Digite o autor">
+                </label>
+                <label>
+                    <input ng-model="vm.input.price" type="text" class="form-control" placeholder="Digite o preço">
+                </label>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" ng-click="vm.addTeam(vm.input)">Cadastrar</button>
+            </div>
+        </form>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="livro in vm.allBooks">
+                    <td>{{livro.id}}</td>
+                    <td>{{livro.titulo}}</td>
+                    <td>{{livro.autor}}</td>
+                    <td>{{livro.preco}}</td>
+                    <td>
+                        <button ng-click="vm.removeBook(livro)" class="btn btn-danger btn-sm">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.js"></script>
+    <script src="http://code.angularjs.org/1.2.4/angular-route.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

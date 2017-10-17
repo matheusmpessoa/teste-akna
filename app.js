@@ -4,22 +4,12 @@ app.controller('mainCtrl', function($http) {
     var vm = this;
     vm.input = {}
 
-    vm.removeBook = function (livro) {
-        if (confirm("Você realmente deseja deletar?")) {
-            $http.delete('http://lab01.akna.com.br/testes/livros.php?id='+livro.id).success(function (data) {
-                vm.allBooks = $.map(vm.allBooks, function(l) {
-                    return (l.id != livro.id) ? l : [];
-                });
-            });
-        }
-        alert("Livro deletado com sucesso!");
-    }
-
     vm.getAllBooks = function () {
         vm.allBooks = {};
         $http.get('http://lab01.akna.com.br/testes/livros.php').success(function (data) {
             vm.allBooks = data;
         });
+        console.log("Livros listados com sucesso!");
     }
     vm.getAllBooks()
 
@@ -33,6 +23,18 @@ app.controller('mainCtrl', function($http) {
             .success(function (data) {
                 vm.getAllBooks()
             });
+            console.log("Livro cadastrado com sucesso!");
+    }
+
+    vm.removeBook = function (livro) {
+        if (confirm("Você realmente deseja deletar?")) {
+            $http.delete('http://lab01.akna.com.br/testes/livros.php?id='+livro.id).success(function (data) {
+                vm.allBooks = $.map(vm.allBooks, function(l) {
+                    return (l.id != livro.id) ? l : [];
+                });
+            });
+        }
+        console.log("Livro removido com sucesso!");
     }
 });
 

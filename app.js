@@ -115,5 +115,4 @@ app.controller('menuCtrl', function($http) {
             ]
         }
     ]
-
 });

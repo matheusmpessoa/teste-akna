@@ -37,13 +37,13 @@
         <form>
             <div class="form-group">
                 <label>
-                    <input ng-model="vm.input.title" type="text" class="form-control" placeholder="Digite o titulo">
+                    <input ng-model="vm.input.title" type="text" class="form-control" placeholder="Digite o titulo" required>
                 </label>
                 <label>
-                    <input ng-model="vm.input.author" type="text" class="form-control" placeholder="Digite o autor">
+                    <input ng-model="vm.input.author" type="text" class="form-control" placeholder="Digite o autor" required>
                 </label>
                 <label>
-                    <input ng-model="vm.input.price" type="text" class="form-control" placeholder="Digite o preço">
+                    <input ng-model="vm.input.price" type="text" class="form-control" placeholder="Digite o preço" required>
                 </label>
                 <label>
                     <button type="submit" class="btn btn-primary" ng-click="vm.addBook(vm.input)">Cadastrar</button>
@@ -61,11 +61,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="livro in vm.allBooks">
-                    <td>{{livro.id}}</td>
-                    <td>{{livro.titulo}}</td>
-                    <td>{{livro.autor}}</td>
-                    <td>{{livro.preco}}</td>
+                <tr ng-repeat="livro in vm.allBooks | orderBy: 'id'">
+                    <td ng-bind="livro.id"></td>
+                    <td ng-bind="livro.titulo"></td>
+                    <td ng-bind="livro.autor"></td>
+                    <td ng-bind="livro.preco"></td>
                     <td>
                         <button ng-click="vm.removeBook(livro)" class="btn btn-danger btn-sm">Excluir</button>
                     </td>

@@ -4,51 +4,40 @@ app.controller('mainCtrl', function($http) {
     var vm = this;
     vm.input = {}
 
-    vm.addBook = function () {
-        vm.push({
-            name: vm.inputLivro
-        });
-        vm.inputLivro = null;
-    }
-
-    vm.removeBook = function () {
-        var index = vm.indexOf(livro);
-        vm.splice(index, 1);
+    vm.removeBook = function (livro) {
+        if (confirm("Você realmente deseja deletar?")) {
+            $http.delete('http://lab01.akna.com.br/testes/livros.php?id='+livro.id).success(function (data) {
+                vm.allBooks = $.map(vm.allBooks, function(l) {
+                    return (l.id != livro.id) ? l : [];
+                });
+            });
+        }
+        alert("Livro deletado com sucesso!");
     }
 
     vm.getAllBooks = function () {
         vm.allBooks = {};
         $http.get('http://lab01.akna.com.br/testes/livros.php').success(function (data) {
-            console.log(data);
             vm.allBooks = data;
         });
     }
     vm.getAllBooks()
 
-
-    vm.addTeam = function (objetoAInserir) {
+    vm.addBook = function (objetoAInserir) {
         var objetoNaApi = {
-            "titulo": objetoAInserir.title
-            , "autor": objetoAInserir.author
-            , "preco": objetoAInserir.title
+            "titulo": objetoAInserir.title,
+            "autor": objetoAInserir.author,
+            "preco": objetoAInserir.price
         }
         $http.post('http://lab01.akna.com.br/testes/livros.php', objetoNaApi)
             .success(function (data) {
-                console.log(data);
                 vm.getAllBooks()
             });
     }
 });
 
-app.controller('menuCtrl', function($http){
+app.controller('menuCtrl', function($http) {
     var mn = this;
-
-    mn.menu = [
-        {title: 'Palmeiras'},
-        {title: 'Santos'},
-        {title: 'Corinthians'},
-        {title: 'São Paulo'},
-    ];
 
     mn.nav = [
         {
